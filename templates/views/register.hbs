@@ -1,0 +1,56 @@
+<html>
+    <title>Register</title>
+
+    <body>
+        This is the register page.
+        <br>
+        <form>
+            <input type="text" placeholder="name" id="name" required>
+            <br>
+            <input type="number" placeholder="age" id="age" required>
+            <br>
+            <input type="text" placeholder="email" id="email" required>
+            <br>
+            <input type="password" placeholder="password" id="password" required>
+            <br>
+            <button type="submit" id="submit">Submit</button>
+        </form>
+
+    </body>
+
+    <script>
+
+        async function register(toSend) {
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json")
+
+            const reqURL = "http://localhost:3000/user"
+            const method = "POST"
+
+            const requestOptions = {
+                method,
+                headers: myHeaders,
+                body: JSON.stringify(toSend),
+                redirect: 'follow'
+            }
+
+            const res = await fetch(reqURL, requestOptions)
+            const data = await res.json()
+            console.log(data)
+        }
+
+
+        document.querySelector("form").addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const name = document.querySelector("#name").value;
+            const email = document.querySelector("#email").value;
+            const password = document.querySelector("#password").value;
+            const age = document.querySelector("#age").value;
+
+            register({ name, email, password, age })
+        });
+
+    </script>
+
+</html>
