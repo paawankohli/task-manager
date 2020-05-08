@@ -11,10 +11,10 @@ router.post("/user", async (req, res) => {
     try {
         const user = await new User(req.body).save()
         const token = await user.generateAuthToken()
-        res.status(201).send({user, token})
+        res.status(201).send({ success: true, user, token })
         mailer.sendWelcomeEmail(user.name, user.email)
     } catch (e) {
-        res.status(400).send(e)
+        res.status(400).send({ success: false, e })
     }
 })
 
@@ -24,9 +24,9 @@ router.post("/user/login", async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
-        res.send({user, token})
+        res.send({ success: true, user, token })
     } catch (e) {
-        res.status(400).send("Invalid credentials")
+        res.status(400).send({ success: false, message: "Invalid credentials" })
     }
 
 })
@@ -36,9 +36,9 @@ router.post("/user/logout", auth, async (req, res) => {
         req.user.tokens = req.user.tokens.filter(item => item.token !== req.token)
         await req.user.save()
         console.log("Logged out of current session for " + req.user.email)
-        res.status(200).send("Logged out of current session for " + req.user.email)
+        res.status(200).send({ success: true, message: `Logged out of current session for ${req.user.email}` })
     } catch (e) {
-        res.status(500).send("unable to log off")
+        res.status(500).send({ success: false, message: "Unable to log out" })
     }
 })
 
@@ -47,9 +47,9 @@ router.post("/user/logoutAll", auth, async (req, res) => {
         req.user.tokens = []
         await req.user.save()
         console.log("Logged out of all sessions for " + req.user.email)
-        res.status(200).send("logged out of all active sessions for" + req.user.email)
+        res.status(200).send({ success: true, message: `Logged out of all active sessions for  ${req.user.email}` })
     } catch (e) {
-        res.status(500).send("unable to log off")
+        res.status(500).send({ success: false, message: `Unable to log out` })
     }
 })
 
@@ -102,15 +102,15 @@ router.patch("/user/me", auth, async (req, res) => {
     const allowed = toUpdate.every(item => allowedUpdates.includes(item))
 
     if (!allowed) {
-        return res.status(400).send({ error: "Invalid updates!" })
+        return res.status(400).send({ success: false, message: "Invalid updates!" })
     }
 
     try {
         toUpdate.forEach(item => req.user[item] = req.body[item])
         await req.user.save()
-        res.status(200).send(req.user)
+        res.status(200).send({ success: true, user: req.user })
     } catch (e) {
-        res.status(500).send(e)
+        res.status(500).send({ success: false, message: "Some error occured!" })
     }
 })
 
@@ -164,11 +164,11 @@ router.delete("/user/me", auth, async (req, res) => {
         await req.user.remove()
         
         console.log("Request resolved. Deleted account: " + req.user.email);
-        res.status(200).send("Your profile has been deleted. Sad to see you go " + req.user.name + " :(")
+        res.status(200).send({ success: true, message: `Your profile has been deleted. Sad to see you go ${req.user.name} :(`})
         mailer.sendLeavingEmail(req.user.name, req.user.email)
 
     } catch (e) {
-        res.status(500).send("Unable to delete you")
+        res.status(500).send({ success: false, message: "Unable to delete your profile" })
     }
 })
 
