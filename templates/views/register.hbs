@@ -9,7 +9,7 @@
             <br>
             <input type="number" placeholder="age" id="age" required>
             <br>
-            <input type="text" placeholder="email" id="email" required>
+            <input type="email" placeholder="email" id="email" required>
             <br>
             <input type="password" placeholder="password" id="password" required>
             <br>
@@ -36,7 +36,16 @@
 
             const res = await fetch(reqURL, requestOptions)
             const data = await res.json()
-            console.log(data)
+            // console.log(data)
+
+            if (data.success === true) {
+                alert("You're now logged in.")
+                localStorage.setItem("gtdToken", `Bearer ${data.token}`)
+                console.log("saved token to local storage")
+                location.replace('/me')
+            } else {
+                alert(data.message)
+            }
         }
 
 

@@ -14,7 +14,7 @@ router.post("/user", async (req, res) => {
         res.status(201).send({ success: true, user, token })
         mailer.sendWelcomeEmail(user.name, user.email)
     } catch (e) {
-        res.status(400).send({ success: false, e })
+        res.status(400).send({ success: false, message: `Unable to create user.` })
     }
 })
 
@@ -61,7 +61,7 @@ router.post("/user/logoutAll", auth, async (req, res) => {
 
 
 router.get("/user/me", auth, async (req, res) => {
-    res.status(200).send(req.user)
+    res.status(200).send({ success: true, user: req.user })
 })
 
 // Only for admins dont include GET /user in production 
@@ -190,31 +190,3 @@ router.delete("/user/:id", async (req, res) => {
 
 
 module.exports = router
-
-
-
-// ::::::::::::::::::::::::OLD ROUTES USING PROMISE CHAINING:::::::::::::::::::::::::::: 
-// app.post("/user", (req, res) => {
-//     const newUser = new User(req.body)
-//     newUser.save()
-//     .then(r => res.status(201).send(r))
-//     .catch(e => res.status(400).send(e))
-// })
-
-
-// app.get("/user", (req, res) => {
-//     User.find({})
-//     .then(users => res.status(200).send(users))
-//     .catch(e => res.status(500).send(e))
-// })
-
-// app.get("/user/:id", (req, res) => {
-//     User.findById(req.params.id)
-//     .then(user => {
-//         if (!user) {
-//             return res.status(404).send("user not found")
-//         }
-//         res.status(200).send(user)
-//     })
-//     .catch(e => res.status(500).send(e))
-// })

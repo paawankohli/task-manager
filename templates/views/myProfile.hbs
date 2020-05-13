@@ -1,0 +1,46 @@
+<html>
+    <title>
+
+    </title>
+    <body>
+        <h1 id="name"></h1>
+        <br>
+        <h2 id="email"></h2>
+
+        <p>
+            <a href="/logout">Logout</a>
+        </p>
+    </body>
+
+    <script>
+
+         async function getProfile() {
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json")
+            myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
+
+            const reqURL = "/user/me"
+            const method = "GET"
+
+            const requestOptions = {
+                method,
+                headers: myHeaders,
+                redirect: 'follow'
+            }
+
+            const res = await fetch(reqURL, requestOptions)
+            const data = await res.json()
+
+            if (data.success) {
+                document.querySelector(`#name`).innerHTML = `Welcome ${data.user.name}`
+                document.querySelector(`#email`).innerHTML = data.user.email
+            } else {
+                alert(data.message)
+                location.replace(`/`)
+            }
+        }
+
+        getProfile()
+
+    </script>
+</html>

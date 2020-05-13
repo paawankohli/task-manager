@@ -13,4 +13,12 @@ router.get("/login", (req, res) => {
     res.render("login.hbs")
 })
 
+router.get("/me", (req, res) => {
+    res.render("myProfile.hbs")
+})
+
+router.get("/logout", (req, res) => {
+    res.render("logout.hbs")
+})
+
 module.exports = router

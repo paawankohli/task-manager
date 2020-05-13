@@ -106,36 +106,3 @@ router.delete("/task/:id", auth, async (req, res) => {
 
 
 module.exports = router
-
-
-
-
-
-
-
-
-// ::::::::::::::::::::::::OLD ROUTES USING PROMISE CHAINING:::::::::::::::::::::::::::: 
-
-// app.post("/task", (req, res) => {
-//     const newTask = new Task(req.body)
-//     newTask.save()
-//     .then(r => res.status(201).send(r))
-//     .catch(e => res.status(400).send(e))
-// })
-
-// app.get("/task", (req, res) => {
-//     Task.find({})
-//     .then(tasks => res.status(200).send(tasks))
-//     .catch(e => res.status(500).send(e))
-// })
-
-// app.get("/task/:id", (req, res) => {
-//     Task.findById(req.params.id)
-//     .then(task => {
-//         if (!task) {
-//             return res.status(404).send("Task not found!")
-//         }
-//         res.status(200).send(task)
-//     })
-//     .catch(e => res.status(500).send(e))
-// })

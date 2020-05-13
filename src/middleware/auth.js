@@ -31,7 +31,7 @@ const auth = async (req, res, next) => {
         next()
 
     } catch (e) {
-        res.status(401).send({ success: false, error: "You're not authenticated!"})
+        res.status(401).send({ success: false, message: "You're not authenticated!"})
     }
 }
 

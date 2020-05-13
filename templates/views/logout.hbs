@@ -1,0 +1,71 @@
+<html>
+    <title>Logout</title>
+    <body>
+        <button id="one">Logout of this session</button>
+        <br>
+        <button id="all">Logout of this all sessions</button>
+    </body>
+
+    <script>
+
+        async function logoutOne () {
+            const myHeaders = new Headers()
+            myHeaders.append("Content-Type", "application/json")
+            myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
+
+            const reqURL = "/user/logout"
+            const method = "POST"
+
+            const requestOptions = {
+                method,
+                headers: myHeaders,
+                redirect: 'follow'
+            }
+
+            const res = await fetch(reqURL, requestOptions)
+            const data = await res.json()
+            console.log(data)
+
+            alert(data.message)
+
+            if (data.success) {
+                localStorage.removeItem('gtdToken')
+                console.log(`Removed token from local storage `)
+                location.replace('/')
+            } else {
+                alert(data.message)
+            }
+        }
+
+        async function logoutAll () {
+            const myHeaders = new Headers()
+            myHeaders.append("Content-Type", "application/json")
+            myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
+
+            const reqURL = "/user/logoutAll"
+            const method = "POST"
+
+            const requestOptions = {
+                method,
+                headers: myHeaders,
+                redirect: 'follow'
+            }
+
+            const res = await fetch(reqURL, requestOptions)
+            const data = await res.json()
+            console.log(data)
+
+            alert(data.message)
+            if (data.success) {
+                localStorage.removeItem('gtdToken')
+                console.log(`Removed token from local storage `)
+                location.replace('/')
+            } else {
+                alert(data.message)
+            }
+        }
+
+        document.querySelector('#one').addEventListener('click', logoutOne)
+        document.querySelector('#all').addEventListener('click', logoutAll)
+    </script>
+</html>
