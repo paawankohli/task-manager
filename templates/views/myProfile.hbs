@@ -1,20 +1,26 @@
 <html>
-    <title>
-
-    </title>
+    <head>
+        <title>
+            Profile
+        </title>
+    </head>
     <body>
         <h1 id="name"></h1>
         <br>
-        <h2 id="email"></h2>
 
-        <p>
-            <a href="/logout">Logout</a>
-        </p>
+        <button id="logoutone">Logout of this session</button>    
+        <button id="logoutall">Logout of this all sessions</button>
+        <br>
+
+        {{!-- add functionality to update user details --}}
+
+        <br>
+        <button id="deleteUser">Delete my Profile</button>
     </body>
 
     <script>
 
-         async function getProfile() {
+        async function getProfile() {
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json")
             myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
@@ -33,7 +39,6 @@
 
             if (data.success) {
                 document.querySelector(`#name`).innerHTML = `Welcome ${data.user.name}`
-                document.querySelector(`#email`).innerHTML = data.user.email
             } else {
                 alert(data.message)
                 location.replace(`/`)
@@ -41,6 +46,118 @@
         }
 
         getProfile()
+
+
+
+
+
+
+
+
+        // Logout functionality
+
+        async function logoutOne () {
+            const myHeaders = new Headers()
+            myHeaders.append("Content-Type", "application/json")
+            myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
+
+            const reqURL = "/user/logout"
+            const method = "POST"
+
+            const requestOptions = {
+                method,
+                headers: myHeaders,
+                redirect: 'follow'
+            }
+
+            const res = await fetch(reqURL, requestOptions)
+            const data = await res.json()
+            console.log(data)
+
+            alert(data.message)
+
+            if (data.success) {
+                localStorage.removeItem('gtdToken')
+                console.log(`Removed token from local storage `)
+                location.replace('/')
+            } else {
+                alert(data.message)
+            }
+        }
+
+        async function logoutAll () {
+            const myHeaders = new Headers()
+            myHeaders.append("Content-Type", "application/json")
+            myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
+
+            const reqURL = "/user/logoutAll"
+            const method = "POST"
+
+            const requestOptions = {
+                method,
+                headers: myHeaders,
+                redirect: 'follow'
+            }
+
+            const res = await fetch(reqURL, requestOptions)
+            const data = await res.json()
+            console.log(data)
+
+            alert(data.message)
+            if (data.success) {
+                localStorage.removeItem('gtdToken')
+                console.log(`Removed token from local storage `)
+                location.replace('/')
+            } else {
+                alert(data.message)
+            }
+        }
+
+        document.querySelector('#logoutone').addEventListener('click', logoutOne)
+        document.querySelector('#logoutall').addEventListener('click', logoutAll)
+
+
+
+
+
+
+
+
+
+        // Delete user functionality
+
+        async function deleteUser () {
+            const myHeaders = new Headers()
+            myHeaders.append("Content-Type", "application/json")
+            myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
+
+            const reqURL = "/user/me"
+            const method = "DELETE"
+
+            const requestOptions = {
+                method,
+                headers: myHeaders,
+                redirect: 'follow'
+            }
+
+            const res = await fetch(reqURL, requestOptions)
+            const data = await res.json()
+            // console.log(data)
+
+            alert(data.message)
+
+            if (data.success) {
+                localStorage.removeItem('gtdToken')
+                console.log(`Removed token from local storage`)
+                location.replace('/')
+            } else {
+                alert(data.message)
+            }
+        }
+
+        document.querySelector('#deleteUser').addEventListener('click', deleteUser)
+
+
 
     </script>
 </html>

@@ -39,7 +39,7 @@
             // console.log(data)
 
             if (data.success === true) {
-                alert("You're now logged in.")
+                alert("Welcome. You're now logged in.")
                 localStorage.setItem("gtdToken", `Bearer ${data.token}`)
                 console.log("saved token to local storage")
                 location.replace('/me')
