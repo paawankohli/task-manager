@@ -47,7 +47,7 @@ router.get("/task/:id", auth, async (req, res) => {
     
         if (!task) {
             console.log("User tried to access a task that does't exist.")
-            return res.status(404).send("Task not found")
+            return res.status(404).send({ success: false, message: "Unable to fetch task" })
         }
         
         console.log("Found task. Sent it to user.")
