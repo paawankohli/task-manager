@@ -33,4 +33,8 @@ router.get("/about", (req, res) => {
     res.render("about.hbs")
 })
 
+router.get("/api", (req, res) => {
+    res.render("api.hbs")
+})
+
 module.exports = router

@@ -29,9 +29,5 @@ app.use(userRouter)
 app.use(taskRouter)
 app.use(clientRouter)
 
-app.get("/api", (req, res) => {
-    res.send(`Welcome. This is an API. <a href="https://github.com/paawankohli/task-manager">Documentation</a>`)
-})
-
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server is up on port ${port}`))
