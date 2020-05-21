@@ -29,4 +29,8 @@ router.get("/createTask", (req, res) => {
     res.render("createTask.hbs")
 })
 
+router.get("/about", (req, res) => {
+    res.render("about.hbs")
+})
+
 module.exports = router
