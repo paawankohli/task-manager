@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <h1>sample</h1>
+        <h2>sample</h2>
+    </body>
+
+    <script>
+        
+        async function getTask (id) {
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json")
+            myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
+
+            const reqURL = `/task/${id}` 
+            const method = "GET"
+
+            const requestOptions = {
+                method,
+                headers: myHeaders,
+                redirect: 'follow'
+            }
+
+            const res = await fetch(reqURL, requestOptions)
+            const data = await res.json()
+
+            if (data.success) {
+                document.querySelector('h1').innerHTML = data.task.description
+                document.querySelector('h2').innerHTML = data.task.completed
+            } else {
+                alert(data.message)
+                location.replace(`/allTasks`)
+            }
+        }
+
+        getTask(location.pathname.replace("/oneTask/", ""))
+
+    </script>
+</html>

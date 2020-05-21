@@ -17,6 +17,9 @@
 
     <script>
 
+        if (localStorage.getItem('gtdToken'))
+            location.replace("/me")
+
         async function login(toSend) {
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json")

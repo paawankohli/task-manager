@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>Task</title>
+    </head>
+    <body>
+        <div id="tasks-container">
+            {{!-- 
+            <div class="task">
+                <p class="description">
+                </p>
+                <a class="taskLink" href="">
+                </a>
+                <div class="status"></div>    
+            </div> 
+            --}}
+        </div>
+    </body>
+
+    <script>
+
+        function buildHTML (task) {
+
+            let taskWrapper = document.createElement('div')
+            taskWrapper.classList.add('task')
+            
+            const desc = document.createElement('p')
+            desc.classList.add('description')
+            desc.innerHTML = task.description
+
+            const link = document.createElement('a')
+            link.classList.add('taskLink')
+            link.setAttribute('href', `/oneTask/${task._id}`)
+            link.innerText=`link`
+
+            const done = document.createElement('div')
+            done.classList.add('status')
+            done.innerText=task.completed
+
+            taskWrapper.appendChild(desc)
+            taskWrapper.appendChild(link)
+            taskWrapper.appendChild(done)
+
+            return taskWrapper
+        }
+        
+        async function getTasks() {
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json")
+            myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
+
+            const reqURL = "/task"
+            const method = "GET"
+
+            const requestOptions = {
+                method,
+                headers: myHeaders,
+                redirect: 'follow'
+            }
+
+            const res = await fetch(reqURL, requestOptions)
+            const data = await res.json()
+
+            if (data.success) {
+                const container = document.querySelector(`#tasks-container`)
+                data.tasks.forEach(task => container.appendChild(buildHTML(task)))
+            } else {
+                alert(data.message)
+                location.replace(`/`)
+            }
+        }
+
+        getTasks()
+
+    </script>
+</html>

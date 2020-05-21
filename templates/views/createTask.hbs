@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>
+            Create Task
+        </title>
+    </head>
+    <body>
+        <form>
+            <input type="text" placeholder="description" id="description" required>
+
+            <label for="completed">Completed</label>
+            <input type="checkbox" id="completed">
+            <button type="submit" id="submit">Submit</button>
+        </form>
+    </body>
+
+    <script>
+
+        async function createTask (toSend) {
+
+            console.log(toSend)
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json")
+            myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
+
+            const reqURL = "/task"
+            const method = "POST"
+
+            const requestOptions = {
+                method,
+                headers: myHeaders,
+                body: JSON.stringify(toSend),
+                redirect: 'follow'
+            }
+
+            const res = await fetch(reqURL, requestOptions)
+            const data = await res.json()
+
+            console.log(data)
+
+            if (data.success) {
+                alert(data.message)
+                location.replace(`/oneTask/${data.id}`)
+            } else {
+                alert(data.message)
+                document.querySelector('form').reset()
+            }
+        }
+
+
+        document.querySelector("form").addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const description = document.querySelector("#description").value;
+            const completed = document.querySelector("#completed").checked;
+
+            createTask({ description, completed })
+        });
+    
+    </script>
+</html>

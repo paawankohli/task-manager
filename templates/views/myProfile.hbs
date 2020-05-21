@@ -41,6 +41,11 @@
                 document.querySelector(`#name`).innerHTML = `Welcome ${data.user.name}`
             } else {
                 alert(data.message)
+
+                // the jwt in local storage is invalid so removing it.
+                localStorage.removeItem('gtdToken')
+                console.log(`Removed token from local storage `)
+                
                 location.replace(`/`)
             }
         }
