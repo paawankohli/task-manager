@@ -13,9 +13,9 @@ router.post("/task", auth, async (req, res) => {
 
     try {
         await task.save()
-        res.status(201).send(task)
+        res.status(201).send({ success: true, message: 'New task added!', id: task._id})
     } catch (e) {
-        res.status(400).send(e)
+        res.status(400).send({ success: false, message: 'Error occured! Unable to create task' })
     }
 
 })
@@ -24,7 +24,7 @@ router.post("/task", auth, async (req, res) => {
 // Example: GET /task?completed=true&limit=3&page=2
 router.get("/task", auth, async (req, res) => {
 
-    const limit = parseInt(req.query.limit || 4)
+    const limit = parseInt(req.query.limit || 1000)
     const page = parseInt(req.query.page || 1)
 
     const filterParamters = { author: req.user.email }
@@ -34,9 +34,9 @@ router.get("/task", auth, async (req, res) => {
 
     try {
         const tasks = await Task.find(filterParamters).skip((page - 1) * limit).limit(limit)
-        res.status(200).send(tasks)
+        res.status(200).send({ success: true, tasks })
     } catch (e) {
-        res.status(500).send(e)
+        res.status(500).send({ success: false, message: `Can't fetch your tasks.` })
     }
 })
 
@@ -51,9 +51,9 @@ router.get("/task/:id", auth, async (req, res) => {
         }
         
         console.log("Found task. Sent it to user.")
-        res.status(200).send(task)
+        res.status(200).send({ success: true, task })
     } catch (e) {
-        res.status(500).send(e)
+        res.status(500).send({ success: false, message: "Unable to fetch task" })
     }
 })
 
