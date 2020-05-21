@@ -17,4 +17,16 @@ router.get("/me", (req, res) => {
     res.render("myProfile.hbs")
 })
 
+router.get("/allTasks", (req, res) => {
+    res.render("allTasks.hbs")
+})
+
+router.get("/oneTask/:id", (req, res) => {
+    res.render("oneTask.hbs")
+})
+
+router.get("/createTask", (req, res) => {
+    res.render("createTask.hbs")
+})
+
 module.exports = router
