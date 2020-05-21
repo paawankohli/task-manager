@@ -1,0 +1,12 @@
+:root {
+    --yellow: #ffa400ff;
+    --blue: #009ffdff;
+    --purple: #2a2a72ff;
+    --black: #232528ff;
+    --white: #eaf6ffff;
+}
+
+body {
+    margin: 20px;
+    background-color: var(--black);
+}
