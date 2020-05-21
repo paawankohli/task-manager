@@ -20,7 +20,7 @@
                 </a>
                 <div class="status">
 
-                </div>    
+                </div>
             </div> 
             --}}
         </div>
@@ -77,6 +77,10 @@
 
             if (data.success) {
                 const container = document.querySelector(`#tasks-container`)
+
+                if (data.tasks.length === 0) 
+                    return container.innerHTML = "You've no tasks yet. Please create one!"
+                
                 data.tasks.forEach(task => container.appendChild(buildHTML(task)))
             } else {
                 alert(data.message)

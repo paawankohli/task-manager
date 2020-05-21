@@ -10,11 +10,14 @@
         <h1 id="title">sample</h1>
         <h3 id="desc">sample</h3>
         <h3 id="status">sample</h3>
+
+        <button class="delete-btn">Delete Task</button>
     </body>
 
     <script>
+        const id = location.pathname.replace("/oneTask/", "")
         
-        async function getTask (id) {
+        async function getTask () {
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json")
             myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
@@ -41,7 +44,35 @@
             }
         }
 
-        getTask(location.pathname.replace("/oneTask/", ""))
+        getTask()
 
+        // functionality to delete task
+        async function deleteTask () {
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json")
+            myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
+
+            const reqURL = `/task/${id}` 
+            const method = "DELETE"
+
+            const requestOptions = {
+                method,
+                headers: myHeaders,
+                redirect: 'follow'
+            }
+
+            const res = await fetch(reqURL, requestOptions)
+            const data = await res.json()
+
+            if (data.success) {
+                alert(data.message)
+                location.replace("/allTasks")
+            } else {
+                alert(data.message)
+            }
+        }
+
+        document.querySelector(".delete-btn").addEventListener("click", deleteTask)
     </script>
 </html>

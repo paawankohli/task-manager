@@ -94,13 +94,13 @@ router.delete("/task/:id", auth, async (req, res) => {
         
         if (!task) {
             console.log("User tried to delete a task that does't exist.")
-            return res.status(404).send("This task doesn't exist.")
+            return res.status(404).send({ success: false, message: "This task doesn't exist." })
         }
 
         console.log(`Task deleted by ${req.user.email}.`)
-        res.status(200).send({ message: "Task deleted", task})
+        res.status(200).send({ success: true, message: "Task deleted" })
     } catch (e) {
-        res.status(500).send(e)
+        res.status(500).send({ success: false, message: "server error" })
     }
 })
 
