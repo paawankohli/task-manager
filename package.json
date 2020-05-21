@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "free-port": "sudo kill -9 $(sudo lsof -t -i:3000)",
     "start": "node src/index.js",
     "dev": "env-cmd -f ./config/dev.env nodemon src/index.js -e js,css,hbs",
     "mongodb": "/home/paawan/mongodb/bin/mongod --dbpath='/home/paawan/mongodb-data'",
