@@ -1,28 +1,37 @@
 <html>
+
     <head>
-        <title>
-            Create Task
-        </title>
+        <title>Create Task</title>
+        <link rel="stylesheet" href="/css/colors.css">
+        <link rel="stylesheet" href="/css/navbar.css">
+        <link rel="stylesheet" href="/css/create-task.css">
     </head>
+
     <body>
 
         {{>navbar}}
 
         <form>
-            <input type="text" placeholder="title" id="title" required>
+            <h2>CREATE TASK</h2>
+            <input type="text" placeholder="Title" id="title" required>
+                
+            <span class="onoff">
+                <input type="checkbox" value="0" id="completed">
+                <label for="completed"></label>
+            </span>
+
             <br>
-            <input type="text" placeholder="description" id="description" required>
+            <textarea type="text" placeholder="Description" id="description" required></textarea>
             <br>
-            <label for="completed">Completed</label>
-            <input type="checkbox" id="completed">
+            
             <br>
-            <button type="submit" id="submit">Submit</button>
+            <button type="submit" id="submit">Create</button>
         </form>
     </body>
 
     <script>
 
-        async function createTask (toSend) {
+        async function createTask(toSend) {
 
             console.log(toSend)
 
@@ -64,6 +73,7 @@
 
             createTask({ title, description, completed })
         });
-    
+
     </script>
+
 </html>

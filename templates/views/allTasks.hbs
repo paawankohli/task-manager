@@ -1,6 +1,9 @@
 <html>
     <head>
         <title>Task</title>
+        <link rel="stylesheet" href="/css/colors.css">
+        <link rel="stylesheet" href="/css/navbar.css">
+        <link rel="stylesheet" href="/css/allTasks.css">
     </head>
     <body>
 
@@ -9,18 +12,12 @@
         <div id="tasks-container">
             {{!-- 
             <div class="task">
-                <h1 class="title">
-            
-                </h1>
-                <p class="description">
-            
-                </p>
                 <a class="taskLink" href="">
-            
+                    <span class="title">
+                    </span>
+                    <p class="description">
+                    </p>
                 </a>
-                <div class="status">
-
-                </div>
             </div> 
             --}}
         </div>
@@ -33,27 +30,31 @@
             let taskWrapper = document.createElement('div')
             taskWrapper.classList.add('task')
             
-            const title = document.createElement('h1')
+            const link = document.createElement('a')
+            link.classList.add('taskLink')
+            link.setAttribute('href', `/oneTask/${task._id}`)
+            
+            const title = document.createElement('span')
             title.classList.add('title')
             title.innerHTML = task.title
 
             const desc = document.createElement('p')
             desc.classList.add('description')
+            
+            if (task.description.length > 300) 
+                task.description = task.description.substr(0, 296) + " ..."
+            
             desc.innerHTML = task.description
 
-            const link = document.createElement('a')
-            link.classList.add('taskLink')
-            link.setAttribute('href', `/oneTask/${task._id}`)
-            link.innerText=`link`
+            if (task.completed) {
+                taskWrapper.classList.add("complete")
+            } else {
+                taskWrapper.classList.add("incomplete")
+            }
 
-            const done = document.createElement('div')
-            done.classList.add('status')
-            done.innerText=task.completed
-
-            taskWrapper.appendChild(title)
-            taskWrapper.appendChild(desc)
+            link.appendChild(title)
+            link.appendChild(desc)
             taskWrapper.appendChild(link)
-            taskWrapper.appendChild(done)
 
             return taskWrapper
         }

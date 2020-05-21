@@ -1,8 +1,8 @@
 <html>
     <head>
-        <title>
-            One Task
-        </title>
+        <title></title>
+        <link rel="stylesheet" href="/css/colors.css">
+        <link rel="stylesheet" href="/css/navbar.css">
     </head>
     <body>
         {{>navbar}}
@@ -35,6 +35,7 @@
             const data = await res.json()
 
             if (data.success) {
+                document.querySelector('title').innerHTML = data.task.title
                 document.querySelector('#title').innerHTML = data.task.title
                 document.querySelector('#desc').innerHTML = data.task.description
                 document.querySelector('#status').innerHTML = data.task.completed

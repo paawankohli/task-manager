@@ -1,0 +1,54 @@
+.task {
+    margin: 20px;
+    padding: 3px 10px;
+    border: 3px solid var(--blue);
+    border-radius: 10px;
+}
+
+.task:hover {
+    background-color: var(--blue);
+}
+
+.task a {
+    text-decoration: none;
+    font: bold 16px/1.4 "Open Sans", arial, sans-serif;
+    color: var(--white);
+}
+
+.task a .title {
+    padding-right: 10px;
+    margin-top: 1px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.task a .status {
+    padding: 2px 5px;
+    margin-top: 1px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.task a .description {
+    font-weight: normal;
+    padding-top: 5px;
+    font-size: 15px;
+    margin-top: -1px;
+}
+
+.complete {
+    border-color: #45cf1a;
+}
+
+.incomplete {
+    border-color: #e44124;
+}
+
+.complete:hover {
+    background-color: #45cf1a;
+}
+
+.incomplete:hover {
+    background-color: #e44124;
+}
