@@ -9,10 +9,13 @@
         {{>navbar}}
 
         <form>
+            <input type="text" placeholder="title" id="title" required>
+            <br>
             <input type="text" placeholder="description" id="description" required>
-
+            <br>
             <label for="completed">Completed</label>
             <input type="checkbox" id="completed">
+            <br>
             <button type="submit" id="submit">Submit</button>
         </form>
     </body>
@@ -55,10 +58,11 @@
         document.querySelector("form").addEventListener("submit", (e) => {
             e.preventDefault();
 
+            const title = document.querySelector("#title").value;
             const description = document.querySelector("#description").value;
             const completed = document.querySelector("#completed").checked;
 
-            createTask({ description, completed })
+            createTask({ title, description, completed })
         });
     
     </script>

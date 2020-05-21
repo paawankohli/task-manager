@@ -7,8 +7,9 @@
     <body>
         {{>navbar}}
 
-        <h1>sample</h1>
-        <h2>sample</h2>
+        <h1 id="title">sample</h1>
+        <h3 id="desc">sample</h3>
+        <h3 id="status">sample</h3>
     </body>
 
     <script>
@@ -31,8 +32,9 @@
             const data = await res.json()
 
             if (data.success) {
-                document.querySelector('h1').innerHTML = data.task.description
-                document.querySelector('h2').innerHTML = data.task.completed
+                document.querySelector('#title').innerHTML = data.task.title
+                document.querySelector('#desc').innerHTML = data.task.description
+                document.querySelector('#status').innerHTML = data.task.completed
             } else {
                 alert(data.message)
                 location.replace(`/allTasks`)
