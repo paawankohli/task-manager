@@ -27,11 +27,11 @@ button:hover {
 }
 
 #deleteUser {
-    background-color: #cc2c2c;
+    background-color: var(--red);
     color: white;
 }
 
 #deleteUser:hover {
-    background-color: #e02424;
+    background-color: var(--redHover);
     color: white;
 }

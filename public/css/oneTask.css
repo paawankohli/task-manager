@@ -75,11 +75,11 @@ button {
 
 #delete-btn {
     background-color: var(--red);
-    color: var(--black);
+    color: white;
 }
 
 #delete-btn:hover {
-    /* background-color: var(--yellow); */
+    background-color: var(--redHover);
     color: white;
 }
 
