@@ -33,8 +33,8 @@ router.get("/about", (req, res) => {
     res.render("about.hbs")
 })
 
-router.get("/api", (req, res) => {
-    res.render("api.hbs")
+router.get("*", (req, res) => {
+    res.render("error404.hbs")
 })
 
 module.exports = router
