@@ -3,15 +3,28 @@
         <title></title>
         <link rel="stylesheet" href="/css/colors.css">
         <link rel="stylesheet" href="/css/navbar.css">
+        <link rel="stylesheet" href="/css/oneTask.css">
     </head>
     <body>
         {{>navbar}}
 
-        <h1 id="title">sample</h1>
-        <h3 id="desc">sample</h3>
-        <h3 id="status">sample</h3>
+        <form>
+            <input type="text" placeholder="Title" id="title" required>
+                
+            <span class="onoff">
+                <input type="checkbox" value="0" id="completed">
+                <label for="completed"></label>
+            </span>
 
-        <button class="delete-btn">Delete Task</button>
+            <br>
+            <textarea type="text" placeholder="Description" id="description" required></textarea>
+            <br>
+            
+            <br>
+            <button type="submit" id="submit">Save Changes</button>
+        </form>
+
+        <button id="delete-btn">Delete Task</button>
     </body>
 
     <script>
@@ -35,10 +48,10 @@
             const data = await res.json()
 
             if (data.success) {
-                document.querySelector('title').innerHTML = data.task.title
-                document.querySelector('#title').innerHTML = data.task.title
-                document.querySelector('#desc').innerHTML = data.task.description
-                document.querySelector('#status').innerHTML = data.task.completed
+                document.querySelector('title').innerText = data.task.title
+                document.querySelector('#title').value = data.task.title
+                document.querySelector('#description').value = data.task.description
+                document.querySelector('#completed').checked = data.task.completed
             } else {
                 alert(data.message)
                 location.replace(`/allTasks`)
@@ -74,6 +87,6 @@
             }
         }
 
-        document.querySelector(".delete-btn").addEventListener("click", deleteTask)
+        document.querySelector("#delete-btn").addEventListener("click", deleteTask)
     </script>
 </html>
