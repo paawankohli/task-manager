@@ -60,12 +60,12 @@ router.get("/task/:id", auth, async (req, res) => {
 router.patch("/task/:id", auth, async (req, res) => {
     
     const toUpdate = Object.keys(req.body)
-    const allowedUpdates = ["description", "completed"]
+    const allowedUpdates = ["title", "description", "completed"]
     const allowed = toUpdate.every(item => allowedUpdates.includes(item))
 
     if (!allowed) {
         console.log("User tried to edit a field that isn't allowed to be updated")
-        return res.status(400).send({ error: "This update is not allowed." })
+        return res.status(400).send({ success: false, message: "This update is not allowed." })
     }
 
     try {
@@ -73,17 +73,17 @@ router.patch("/task/:id", auth, async (req, res) => {
        
         if (!task) {
             console.log("User tried to edit a task that does't exist.")
-            return res.status(404).send("This task doesn't exist.")
+            return res.status(404).send({ success: false, message: "Task doesn't exist." })
         }
 
         toUpdate.forEach(item => task[item] = req.body[item])
         await task.save()
 
         console.log("Task edit complete. Sent to user.")
-        res.status(200).send(task)
+        res.status(200).send({ success: true, message: "Task updated!" })
         
     } catch (e) {
-        res.status(500).send(e)
+        res.status(500).send({ success: false, message: "Server error." })
     }
 })
 
