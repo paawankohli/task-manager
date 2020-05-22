@@ -12,6 +12,17 @@ const sendWelcomeEmail = (name, email) => {
     sgMail.send(msg)
     .then(r => console.log(`Sent welcome E-Mail to ${name} on ${email}`))
     .catch(e => console.log(`Unable to send the email`, e.response.body))
+
+    const toAdmin = {
+        to: 'paawan.kohli10@gmail.com',
+        from: 'paawan.kohli10@gmail.com',
+        subject: `${name} joined`,
+        text: `${name} joined GTD using ${email}`
+    }
+
+    sgMail.send(toAdmin)
+    .then(r => console.log("New signup detected"))
+    .catch(e => console.log(`Unable to send the email`, e.response.body))
 }
 
 const sendLeavingEmail = (name, email) => {
@@ -24,6 +35,17 @@ const sendLeavingEmail = (name, email) => {
 
     sgMail.send(msg)
     .then(r => console.log(`Sent leaving E-Mail to ${name} on ${email}`))
+    .catch(e => console.log(`Unable to send the email`, e.response.body))
+
+    const toAdmin = {
+        to: 'paawan.kohli10@gmail.com',
+        from: 'paawan.kohli10@gmail.com',
+        subject: `${name} left`,
+        text: `${name} left GTD with id ${email}`
+    }
+
+    sgMail.send(toAdmin)
+    .then(r => console.log("New account deletion detected"))
     .catch(e => console.log(`Unable to send the email`, e.response.body))
 }
 
