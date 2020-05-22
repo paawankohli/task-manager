@@ -21,13 +21,15 @@
             <br>
             
             <br>
-            <button type="submit" id="submit">Save Changes</button>
+            <button type="button" name="save" id="save-btn">Save Changes</button>
+            <button type="button" id="delete-btn">Delete Task</button>
         </form>
 
-        <button id="delete-btn">Delete Task</button>
+
     </body>
 
     <script>
+    
         const id = location.pathname.replace("/oneTask/", "")
         
         async function getTask () {
@@ -60,6 +62,53 @@
 
         getTask()
 
+
+
+
+
+        // functionality to patch task
+        async function patchTask(toSend) {
+            console.log(toSend);
+
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            myHeaders.append("Authorization", localStorage.getItem("gtdToken"));
+
+            const reqURL = `/task/${id}`;
+            const method = "PATCH";
+
+            const requestOptions = {
+                method,
+                headers: myHeaders,
+                body: JSON.stringify(toSend),
+                redirect: "follow",
+            };
+
+            const res = await fetch(reqURL, requestOptions);
+            const data = await res.json();
+
+            if (data.success) {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        }
+
+        document.querySelector("#save-btn").addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const title = document.querySelector("#title").value;
+            const description = document.querySelector("#description").value;
+            const completed = document.querySelector("#completed").checked;
+
+            patchTask({ title, description, completed });
+        });
+
+
+
+
+
         // functionality to delete task
         async function deleteTask () {
 
@@ -87,6 +136,10 @@
             }
         }
 
-        document.querySelector("#delete-btn").addEventListener("click", deleteTask)
+        document.querySelector("#delete-btn").addEventListener("click", (e) => {
+            e.preventDefault()
+            deleteTask()
+        })
+
     </script>
 </html>
