@@ -69,8 +69,7 @@ button {
 }
 
 #save-btn:hover {
-    background-color: var(--yellow);
-    color: var(--black);
+    background-color: var(--yellowHover);
 }
 
 #delete-btn {

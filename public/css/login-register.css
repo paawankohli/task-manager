@@ -41,17 +41,16 @@ input {
     
     border-radius: 10px;
 
-    background-color: var(--yellow);
-    color: var(--black);
-
     text-align: center;
-    border: 0px;
     width: 150px;
     padding: 8px;
     cursor: pointer;
+
+    border: 0px;
+    background-color: var(--yellow);
+    color: var(--black);
 }
 
 #submit:hover {
-    background-color: var(--yellow);
-    color: var(--black);
+    background-color: var(--yellowHover);
 }

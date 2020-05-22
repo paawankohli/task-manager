@@ -37,8 +37,7 @@ button {
 }
 
 button:hover {
-    background-color: var(--yellow);
-    color: var(--black);
+    background-color: var(--yellowHover);
 }
 
 #deleteUser {
@@ -48,5 +47,4 @@ button:hover {
 
 #deleteUser:hover {
     background-color: var(--redHover);
-    color: white;
 }

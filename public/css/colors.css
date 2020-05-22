@@ -8,6 +8,7 @@
     --green: #008000;
     --red: #cc2c2c;
     --redHover: #e02424;
+    --yellowHover: rgb(221, 144, 0);
 }
 
 body {
