@@ -1,22 +1,33 @@
+h2 {
+    font: bold 30px/1.4 "Open Sans", arial, sans-serif;
+    text-align: center;
+    color: var(--yellow);
+}
+
+#tasks-container {
+    font: bold 20px/1.4 "Open Sans", arial, sans-serif;
+    color: var(--white);
+    margin: 0px 15px;
+}
+
 .task {
     margin: 20px;
     padding: 3px 10px;
     border: 3px solid var(--blue);
     border-radius: 10px;
-}
 
-.task:hover {
-    background-color: var(--blue);
+    font: bold 16px/1.4 "Open Sans", arial, sans-serif;
 }
 
 .task a {
     text-decoration: none;
-    font: bold 16px/1.4 "Open Sans", arial, sans-serif;
     color: var(--white);
+    width: 100%;
 }
 
 .task a .title {
     padding-right: 10px;
+    width: 100%;
     margin-top: 1px;
     font-size: 20px;
     font-weight: bold;
@@ -34,21 +45,22 @@
     font-weight: normal;
     padding-top: 5px;
     font-size: 15px;
-    margin-top: -1px;
+    margin: 0px;
+    padding: 5px 0px;
 }
 
 .complete {
-    border-color: #45cf1a;
-}
-
-.incomplete {
-    border-color: #e44124;
+    border-color: var(--green);
 }
 
 .complete:hover {
-    background-color: #45cf1a;
+    background-color: var(--green);
+}
+
+.incomplete {
+    border-color: var(--red);
 }
 
 .incomplete:hover {
-    background-color: #e44124;
+    background-color: var(--red);
 }

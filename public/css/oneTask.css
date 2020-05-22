@@ -48,16 +48,13 @@ textarea {
     height: 200px;
 }
 
-#submit {
+button {
     margin: 10px;
 
     font-weight: bold;
     font-size: larger;
 
     border-radius: 10px;
-
-    background-color: var(--yellow);
-    color: var(--black);
 
     text-align: center;
     border: 0px;
@@ -66,9 +63,24 @@ textarea {
     cursor: pointer;
 }
 
-#submit:hover {
+#save-btn {
     background-color: var(--yellow);
     color: var(--black);
+}
+
+#save-btn:hover {
+    background-color: var(--yellow);
+    color: var(--black);
+}
+
+#delete-btn {
+    background-color: var(--red);
+    color: var(--black);
+}
+
+#delete-btn:hover {
+    /* background-color: var(--yellow); */
+    color: white;
 }
 
 /* Checkbox */
