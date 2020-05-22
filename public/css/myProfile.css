@@ -1,3 +1,18 @@
+body {
+    position: relative;
+}
+
+#wrapper {
+    /* font: bold 25px/1.4 "Open Sans", arial, sans-serif; */
+    text-align: center;
+    color: var(--blue);
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 #name {
     font: bold 24px/1.4 "Open Sans", arial, sans-serif;
     color: var(--yellow);
