@@ -138,6 +138,13 @@
         // Delete user functionality
 
         async function deleteUser () {
+
+            let conf = prompt("Type YES to delete your account.")
+
+            if (conf.trim().toLowerCase() !== 'yes') {
+                return alert("Couldn't confirm. Account not deleted.")
+            }
+            
             const myHeaders = new Headers()
             myHeaders.append("Content-Type", "application/json")
             myHeaders.append("Authorization", localStorage.getItem('gtdToken'))
