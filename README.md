@@ -3,8 +3,11 @@
 deployed on [heroku](https://getthisdone.herokuapp.com/).
 
 ## Environment
+Sample .env file:
 ```
-process.env: MONGODB_URL, JWT_SECRET, sgAPIKey
+sgAPIKey=	
+JWT_SECRET=	
+MONGODB_URL=
 ```
 
 ## Run App
