@@ -1,6 +1,6 @@
 # task-manager
 
-deployed on [heroku](https://getthisdone.herokuapp.com/).
+Deployed on [heroku](https://getthisdone.herokuapp.com/).
 
 ## Environment
 Sample .env file:
