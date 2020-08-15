@@ -46,7 +46,7 @@ router.get("/task/:id", auth, async (req, res) => {
         const task = await Task.findOne({ _id: req.params.id, author: req.user.email })
     
         if (!task) {
-            console.log("User tried to access a task that does't exist.")
+            console.log("User tried to access a task that doesn't exist.")
             return res.status(404).send({ success: false, message: "Unable to fetch task" })
         }
         

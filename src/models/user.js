@@ -73,6 +73,7 @@ UserSchema.methods.toJSON = function () {
     return toSendBack
 }
 
+
 // Generate auth token and add it to the database
 UserSchema.methods.generateAuthToken = async function () {
     const user = this
@@ -130,8 +131,6 @@ UserSchema.pre("remove", async function(next) {
     await Task.deleteMany({ author: user.email })
     next()
 })
-
-
 
 
 const User = mongoose.model("User", UserSchema)
