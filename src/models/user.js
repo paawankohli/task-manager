@@ -17,34 +17,19 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true,
         trim: true,
-        lowercase: true,
-        validate (value) {
-            if (!validator.isEmail(value)) {
-                throw new Error ("Invalid email!")
-            }
-        }
+        lowercase: true
     },
 
     password: {
         type: String,
         required: true,
         trim: true,
-        minlength: 7,
-        validate (value) {
-            if (value.toLowerCase().includes("password")) {
-                throw new Error("Password can't be password")
-            }
-        }
+        minlength: 7
     },
     
     age: {
         type: Number,
-        default: 18,
-        validate (value) {
-            if (value < 0) {
-                throw new Error("Enter positive number")
-            }
-        }
+        default: 18
     },
 
     tokens: [{
